@@ -7,13 +7,20 @@
 export const CHAT_PASSWORD = "123456";
 
 // 默认模型
-export const DEFAULT_MODEL = "deepseek-ai/deepseek-v4-pro";
+export const DEFAULT_MODEL = "deepseek-v4-pro";
 
-// 模型列表（label 是下拉显示；persona=1 使用 PROMPT_1；persona=2 使用 PROMPT_2）
+// 模型列表
 export const MODELS = [
-  { id: "deepseek-ai/deepseek-v4-pro", label: "deepseek-v4-pro", persona: 1 },
-  { id: "z-ai/glm-5.1", label: "glm-5.1", persona: 2 },
-  { id: "openai/gpt-oss-120b", label: "gpt-oss-120b", persona: 3 },
+  {
+    id: "deepseek-v4-pro",
+    label: "DeepSeek V4 Pro",
+    persona: 1
+  },
+  {
+    id: "deepseek-v4-flash",
+    label: "DeepSeek V4 Flash",
+    persona: 1
+  }
 ];
 
 // 内置人物模板 #1（deepseek/glm）——不会下发到网页
