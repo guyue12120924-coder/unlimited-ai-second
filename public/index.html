@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -8,134 +8,113 @@
 </head>
 <body>
 <div id="app">
-  <div id="topbar">
+  <header id="topbar">
     <div class="topbar-shell">
-      <div class="topbar-scroll" id="topbarScroll">
-        <div class="topbar-inner">
-          <button class="iconbtn" id="donateBtn" title="打赏 / Donate">
-            <span class="emoji">☕</span>
-          </button>
-
-          <a
-            href="https://github.com/MallocPointer/unlimited-ai"
-            target="_blank"
-            class="iconbtn"
-            id="githubBtn"
-            style="text-decoration: none;"
-            title="GitHub 开源地址"
-          >
-            <svg height="20" width="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-            </svg>
-          </a>
-
-          <div class="pill model-pill">
-            <label for="modelSel" class="model-label">Model</label>
-            <select id="modelSel"></select>
-          </div>
-
-          <button class="iconbtn" id="personaToggle" title="😈=使用内置人物扮演 | 😇=不使用内置（网页自定义才生效）">😈</button>
-          <button class="iconbtn" id="settingsBtn" title="Settings">⚙️</button>
+      <div class="brand-block">
+        <div class="brand-mark">D</div>
+        <div>
+          <div class="brand-title">DeepSeek Chat</div>
+          <div class="brand-subtitle">Cloudflare Worker</div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <div id="history">
+      <div class="topbar-actions">
+        <label class="model-pill" for="modelSel">
+          <span class="model-label">Model</span>
+          <select id="modelSel"></select>
+        </label>
+
+        <button class="iconbtn" id="personaToggle" title="😈=使用内置人物扮演 | 😇=不使用内置（网页自定义才生效）">😈</button>
+        <button class="iconbtn" id="themeToggle" title="切换白天/黑夜模式" aria-label="切换白天/黑夜模式">☾</button>
+        <button class="iconbtn" id="settingsBtn" title="Settings" aria-label="Settings">⚙</button>
+
+        <a
+          href="https://github.com/guyue12120924-coder/unlimited-ai-second"
+          target="_blank"
+          rel="noreferrer"
+          class="iconbtn"
+          id="githubBtn"
+          title="GitHub 仓库"
+          aria-label="GitHub 仓库"
+        >
+          <svg height="18" width="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="history">
     <div class="chat" id="chat">
+      <div class="empty-state" id="emptyState">
+        <div class="empty-title">今天想聊点什么？</div>
+        <div class="empty-subtitle">选择模型，输入问题，然后开始对话。</div>
+      </div>
       <div id="bottom-spacer"></div>
     </div>
-  </div>
+  </main>
 
   <div class="input-floating">
     <div class="input-inner" id="composer">
-      <textarea id="msg" rows="1" placeholder="Message..."></textarea>
-      <button id="sendBtn">Send</button>
+      <textarea id="msg" rows="1" placeholder="Message DeepSeek..."></textarea>
+      <button id="sendBtn" aria-label="发送">Send</button>
     </div>
   </div>
 
-  <div id="settingsMask">
-    <div id="settings">
+  <div id="settingsMask" aria-hidden="true">
+    <div id="settings" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
       <div id="settingsHeader">
-        <h3>Settings</h3>
-        <div class="hint">所有数据仅保存在本地浏览器（localStorage），不会上传</div>
+        <div>
+          <h3 id="settingsTitle">Settings</h3>
+          <div class="hint">所有数据仅保存在本地浏览器，不会上传到额外服务。</div>
+        </div>
+        <button class="iconbtn subtle" id="closeSettings" title="关闭" aria-label="关闭">×</button>
       </div>
 
-      <div class="card">
-        <h4>本地对话记忆（Local History）</h4>
-        <p>
-          开启后：刷新页面/重开浏览器仍会恢复对话。关闭后：仅本次页面会话有效，不再落盘保存。<br>
-          ⚠️ 清除历史只会删除本地对话，不会影响“网页自定义人物模板”。
-        </p>
+      <section class="card">
+        <h4>本地对话记忆</h4>
+        <p>开启后，刷新页面或重开浏览器会恢复对话。关闭后，只保留当前页面会话。</p>
 
         <div class="rowline">
           <div class="toggle">
             <input type="checkbox" id="historyKeep">
-            <label for="historyKeep">保留本地历史（启用本地记忆）</label>
+            <label for="historyKeep">保留本地历史</label>
           </div>
           <div class="btns">
-            <button class="smallbtn danger" id="clearHistory">清除本地历史</button>
+            <button class="smallbtn danger" id="clearHistory">清除历史</button>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="card">
-        <h4>网页自定义人物模板（Web Custom Persona）</h4>
-        <p>
-          ⚠️ 仅当右上角为 <b>😇</b> 时，此处才会生效；<b>😈 会忽略这里</b>。<br>
-          清除模板只会删除网页自定义内容，不会影响本地历史。
-        </p>
+      <section class="card">
+        <h4>网页自定义人物模板</h4>
+        <p>仅当右上角为 <b>😇</b> 时生效；<b>😈</b> 会使用 Worker 内置提示词。</p>
 
         <div class="rowline">
           <div class="toggle">
             <input type="checkbox" id="promptKeep">
-            <label for="promptKeep">保留自定义人物模板（保存到本地）</label>
+            <label for="promptKeep">保存自定义模板到本地</label>
           </div>
           <div class="btns">
-            <button class="smallbtn danger" id="clearPrompt">清除自定义模板</button>
+            <button class="smallbtn danger" id="clearPrompt">清除模板</button>
           </div>
         </div>
 
-        <textarea id="customPrompt" placeholder="仅😇时生效：在这里写网页端自定义 system prompt（可多行）。"></textarea>
+        <textarea id="customPrompt" placeholder="仅 😇 时生效：在这里写网页端自定义 system prompt。"></textarea>
 
-        <div class="rowline">
+        <div class="rowline last-row">
           <div></div>
           <div class="btns">
-            <button class="smallbtn" id="savePrompt">保存</button>
-            <button class="smallbtn" id="closeSettings">关闭</button>
+            <button class="smallbtn primary" id="savePrompt">保存</button>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="donateMask">
-    <div id="donateCard">
-      <div id="donateHead">
-        <div class="t">打赏 / Donate</div>
-        <button id="donateClose">✕</button>
-      </div>
-      <div id="donateBody">
-        <img id="donateImg" src="/donate.png" alt="WeChat Pay QR" />
-        <div id="donateNote">
-          如果真的帮助到了你，请为我打赏一杯咖啡吧，有了你的赞助，我会将服务一直运行下去的。
-          我的联系方式：admin@airymoon.com。
-          项目开源地址：https://github.com/MallocPointer/unlimited-ai
-        </div>
-      </div>
+      </section>
     </div>
   </div>
 </div>
 
 <script src="/config.js"></script>
 <script src="/app.js"></script>
-<script>
-  window.addEventListener("load", function () {
-    const scroller = document.getElementById("topbarScroll");
-    if (scroller) {
-      scroller.scrollLeft = scroller.scrollWidth;
-    }
-  });
-</script>
 </body>
 </html>
