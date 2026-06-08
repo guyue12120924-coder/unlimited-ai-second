@@ -82,24 +82,26 @@ async function handleChat(request, env) {
     });
   }
 
-  if (!env.NVIDIA_API_KEY) {
+  const apiKey = env.DEEPSEEK_API_KEY || env.NVIDIA_API_KEY;
+  if (!apiKey) {
     return resp(
-      "Missing NVIDIA_API_KEY (please set it with wrangler secret).",
+      "Missing DEEPSEEK_API_KEY (please set it in Cloudflare Worker secrets).",
       "text/plain; charset=utf-8",
       500
     );
   }
 
-  const upstream = await fetch("https://integrate.api.nvidia.com/v1/chat/completions", {
+  const upstream = await fetch("https://api.deepseek.com/chat/completions", {
     method: "POST",
     headers: {
-      "Authorization": `Bearer ${env.NVIDIA_API_KEY}`,
+      "Authorization": `Bearer ${apiKey}`,
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
       model,
       stream: true,
       stream_options: { include_usage: true },
+      thinking: { type: "disabled" },
       messages: upstreamMessages
     })
   });
